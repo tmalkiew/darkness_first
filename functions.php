@@ -54,6 +54,11 @@
 	 
 	 add_theme_support('post-formats' , array( 'aside') );
 	 
+	 /**
+	 * Enable support for the Post Thumbnails
+	 */
+	 
+	 add_theme_support('post_thumbnails');
 	 
 	 /**
 	 * This theme uses wp_nav_menu() in one location.
@@ -109,3 +114,57 @@ function darkness_widgets_init() {
     ) );
 }
 add_action( 'widgets_init', 'darkness_widgets_init' );
+
+/**
+ * Custom Post Type - Music Reviews
+ * @package Darkness
+ * @since darkness 0.1
+ *
+ */
+ 
+ function darkness_music_reviews() {
+	 //Set UI labels for music reviews
+	 $labels = array (
+		'name' 				=> _x('Reviews', 'Post Type General Name', 'darkness'),
+		'singular_name' 	=> _x('Review', 'Post Type Singular Name', 'darkness'),
+		'menu_name'			=> __('Reviews', 'darkness'),
+		'all_items'			=> __('All Reviews', 'darkness'),
+		'view_item'			=> __('View Review', 'darkness'),
+		'add_new_item'		=> __('Add New Review', 'darkness'),
+		'add_new'			=> __('Add New', 'darkness'),
+		'edit_item'			=> __('Edit Review', 'darkness'),
+		'update_item'		=> __('Update Review', 'darkness'),
+		'search_items'		=> __('Search Review', 'darkness'),
+		'not_found'			=> __('Review Not Found', 'darkness'),
+		'not_found_in_trash'=> __('Review Not Found in Trash', 'darkness'),
+	);
+	
+	//Set other options for music reviews
+	
+	$args = array (
+		'label' 			=> __('reviews', 'darkness'),
+		'description'		=> __('Music News and Reviews', 'darkness'),
+		'labels'			=> $labels,
+		//Features this CPT supports in Post Editor
+		'supports'			=> array('title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom_fileds', 'post_formats',),
+		//Enable custom taxonomies
+		'taxonomies' 		=> array('reviews','genres', 'bands', ),
+		'hierarchical'		=> false,
+		'public'			=> true,
+		'show_in_menu'		=> true,
+		'show_in_nav_menus'	=> true,
+		'show_in_admin_bar'	=> true,
+		'menu_position'		=> 5,
+		'can_export'		=> true,
+		'has_archive'		=> true,
+		'exclude_from_search' => false,
+		'publicly_queryable'=> true,
+		'capability_type'	=> 'page',
+	);
+	 
+	 // Registering CPT
+	 
+	 register_post_type('reviews', $args);
+ }
+ 
+ add_action('init', 'darkness_music_reviews',0 );
