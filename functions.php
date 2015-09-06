@@ -115,14 +115,26 @@ function darkness_widgets_init() {
 }
 add_action( 'widgets_init', 'darkness_widgets_init' );
 
+
 /**
- * Custom Post Type - Music Reviews
+ * Custom Taxonomies for Reviews
+ * @package Darkness
+ * @since darkness 0.1
+ *
+ */
+
+
+
+
+
+/**
+ * Custom Post Type - Reviews
  * @package Darkness
  * @since darkness 0.1
  *
  */
  
- function darkness_music_reviews() {
+ function darkness_reviews() {
 	 //Set UI labels for music reviews
 	 $labels = array (
 		'name' 				=> _x('Reviews', 'Post Type General Name', 'darkness'),
@@ -167,4 +179,4 @@ add_action( 'widgets_init', 'darkness_widgets_init' );
 	 register_post_type('reviews', $args);
  }
  
- add_action('init', 'darkness_music_reviews',0 );
+ add_action('init', 'darkness_reviews',0 );
